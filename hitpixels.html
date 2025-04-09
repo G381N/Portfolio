@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HitPixels - Gebin George</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <style>
+        :root {
+            --primary-color: #ff0000;
+            --dark-bg: #121212;
+            --card-bg: #242424;
+            --text-light: #ccc;
+            --text-dark: #999;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg);
+            color: #fff;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before, body::after {
+            content: none;
+        }
+        
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .glow-orb:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 69, 0, 0.4);
+            top: 15%;
+            left: 5%;
+            animation: floatOrb1 25s linear infinite;
+        }
+        
+        .glow-orb:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 140, 0, 0.35);
+            bottom: 10%;
+            right: 5%;
+            animation: floatOrb2 30s linear infinite;
+        }
+        
+        .glow-orb:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 99, 71, 0.3);
+            top: 60%;
+            left: 25%;
+            animation: floatOrb3 20s linear infinite;
+        }
+        
+        .glow-orb:nth-child(4) {
+            width: 350px;
+            height: 350px;
+            background: rgba(255, 165, 0, 0.25);
+            top: 30%;
+            right: 15%;
+            animation: floatOrb4 28s linear infinite;
+        }
+        
+        .glow-orb:nth-child(5) {
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 69, 0, 0.35);
+            bottom: 30%;
+            left: 10%;
+            animation: floatOrb5 22s linear infinite;
+        }
+        
+        @keyframes floatOrb1 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, 50px) rotate(90deg); }
+            50% { transform: translate(50px, 100px) rotate(180deg); }
+            75% { transform: translate(-50px, 50px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        @keyframes floatOrb2 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-80px, -40px) rotate(120deg); }
+            66% { transform: translate(-40px, -80px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        @keyframes floatOrb3 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(60px, -60px) rotate(180deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        @keyframes floatOrb4 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-100px, 80px) rotate(120deg); }
+            66% { transform: translate(80px, -60px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        @keyframes floatOrb5 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(120px, 40px) rotate(180deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: rgba(18, 18, 18, 0.95);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(135deg, #121212, #0a0a0a);
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #ff0000, #ff3333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            padding: 0.8rem 2rem;
+            background: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .cta-button:hover {
+            background: #cc0000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .video-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.15);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 aspect ratio */
+            overflow: hidden;
+        }
+        
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .video-card:hover .video-thumbnail img {
+            transform: scale(1.05);
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .video-card:hover .video-overlay {
+            opacity: 1;
+        }
+        
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 0, 0, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transform: scale(0.8);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        
+        .video-card:hover .play-button {
+            transform: scale(1);
+            background: rgba(255, 0, 0, 1);
+        }
+        
+        .video-info {
+            padding: 1.5rem;
+        }
+        
+        .video-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .video-info p {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .video-stats {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-dark);
+            font-size: 0.85rem;
+        }
+        
+        .video-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .about-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a, #121212);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .about-text p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .social-links a {
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        footer {
+            background: #0a0a0a;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        footer p {
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 992px) {
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .about-image {
+                max-width: 300px;
+                margin: 0 auto 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 4.5rem;
+                left: 0;
+                width: 100%;
+                background: rgba(18, 18, 18, 0.95);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+                color: #fff;
+                cursor: pointer;
+            }
+            
+            .about-text h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem; background: rgba(18, 18, 18, 0.95); position: fixed; top: 0; left: 0; width: 100%; box-sizing: border-box; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <a href="#" class="logo" style="font-size: 1.8rem; font-weight: 700; color: var(--primary-color); text-decoration: none; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="uil uil-film"></i> HitPixels
+        </a>
+        <div class="nav-links" style="display: flex; gap: 2rem;">
+            <a href="index.html" style="color: #fff; text-decoration: none; font-weight: 500; transition: color 0.3s ease;">Portfolio</a>
+            <a href="#videos" style="color: #fff; text-decoration: none; font-weight: 500; transition: color 0.3s ease;">Videos</a>
+            <a href="#about" style="color: #fff; text-decoration: none; font-weight: 500; transition: color 0.3s ease;">About</a>
+            <a href="bikeswithgebin.html" style="color: #fff; text-decoration: none; font-weight: 500; transition: color 0.3s ease;">Instagram</a>
+        </div>
+        <div class="menu-toggle" style="display: none; font-size: 1.5rem; color: #fff; cursor: pointer;">
+            <i class="uil uil-bars"></i>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to HitPixels</h1>
+            <p>Exploring technology, cybersecurity, and weekend adventures through the lens of Gebin George. Join me as I share insights, tutorials, and experiences from my journey in the digital world.</p>
+            <a href="https://www.youtube.com/channel/UCJWCQkIes8obeWnSYMJWoJg/" target="_blank" class="cta-button">
+                <i class="uil uil-youtube"></i> Subscribe Now
+            </a>
+        </div>
+    </section>
+    
+    <section id="videos" class="container">
+        <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem; position: relative;">
+            Featured Videos
+            <span style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: linear-gradient(90deg, transparent, #ff0000, transparent);"></span>
+        </h2>
+        
+        <div id="video-grid" class="video-grid">
+            <!-- Videos will be loaded here dynamically -->
+            <div class="loading-spinner" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+                <div style="display: inline-block; width: 50px; height: 50px; border: 3px solid rgba(255,0,0,0.3); border-radius: 50%; border-top-color: #ff0000; animation: spin 1s ease-in-out infinite;"></div>
+                <p style="margin-top: 1rem; color: #ccc;">Loading videos...</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="images/ytllgog.png" alt="HitPixels Logo">
+                </div>
+                <div class="about-text">
+                    <h2>About HitPixels</h2>
+                    <p>Welcome to my YouTube channel, where variety meets curiosity! 🚀</p>
+                    <p>I started with short stories that always left you hanging on a cliffhanger, keeping you coming back for more. As time passed, I ventured into fascinating factual videos, exploring mind-blowing facts and unraveling some of the most interesting places in the world 🌍.</p>
+                    <p>Currently, I'm diving deep into creating even more exciting fact-based content, but that's not all. The future holds learning-focused videos too, where you can pick up new skills and knowledge from various fields. And here's the twist—cybersecurity enthusiasts, get ready! As I continue my journey into the world of cybersecurity, I'll be sharing everything I learn along the way 💻🔐.</p>
+                    <p>But wait, there's more! The ultimate goal? To bring you on an adrenaline-filled ride through bike-related content 🏍️, where I'll be sharing everything from tips and tricks to my personal biking adventures.</p>
+                    <p>Stay tuned for more surprises and dive into a world full of learning, fun, and excitement!</p>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/G381N/GebinGeorge" target="_blank"><i class="uil uil-github"></i></a>
+                        <a href="https://www.linkedin.com/in/gebin-george-aa4b40317/" target="_blank"><i class="uil uil-linkedin"></i></a>
+                        <a href="https://www.instagram.com/gebingeorge_" target="_blank"><i class="uil uil-instagram"></i></a>
+                        <a href="https://x.com/G38iNGeorge" target="_blank"><i class="uil uil-twitter"></i></a>
+                        <a href="https://www.youtube.com/channel/UCJWCQkIes8obeWnSYMJWoJg/" target="_blank"><i class="uil uil-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 HitPixels by Gebin George. All rights reserved. Made with <span style="color: #ff0000;">❤</span> in Bangalore</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Animation for elements when they come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, {threshold: 0.1});
+            
+            // Add the animation class
+            const style = document.createElement('style');
+            style.textContent = `
+                .animate {
+                    opacity: 1 !important;
+                    transform: translateY(0) !important;
+                }
+                
+                @keyframes spin {
+                    to { transform: rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Load YouTube videos
+            loadYouTubeVideos();
+            
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (menuToggle && navLinks) {
+                menuToggle.style.display = window.innerWidth <= 768 ? 'block' : 'none';
+                
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    this.innerHTML = navLinks.classList.contains('active') ? 
+                        '<i class="uil uil-times"></i>' : 
+                        '<i class="uil uil-bars"></i>';
+                });
+                
+                window.addEventListener('resize', function() {
+                    menuToggle.style.display = window.innerWidth <= 768 ? 'block' : 'none';
+                    if (window.innerWidth > 768) {
+                        navLinks.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="uil uil-bars"></i>';
+                    }
+                });
+            }
+            
+            // Find and remove the duplicate menu toggle element
+            const menuToggles = document.querySelectorAll('.menu-toggle');
+            if (menuToggles.length > 1) {
+                menuToggles[1].remove();
+            }
+        });
+
+        // YouTube API integration with your actual API key
+        const CHANNEL_ID = 'UCJWCQkIes8obeWnSYMJWoJg';
+        const API_KEY = 'AIzaSyCjNL-taIoYvsrHnJFcNQYsl4M0T1EyFH4'; // Your actual API key
+        const VIDEO_COUNT = 6; // Exactly 6 videos
+        
+        async function loadYouTubeVideos() {
+            try {
+                const videos = await fetchYouTubeVideos();
+                const videoGrid = document.getElementById('video-grid');
+                
+                if (videos.length > 0) {
+                    videoGrid.innerHTML = videos.map(createVideoCard).join('');
+                } else {
+                    displayFallbackVideos();
+                }
+                
+                // Observe video cards for animation
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate');
+                        }
+                    });
+                }, {threshold: 0.1});
+                
+                document.querySelectorAll('.video-card').forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(30px)';
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.transitionDelay = `${index * 0.1}s`;
+                    observer.observe(card);
+                });
+            } catch (error) {
+                console.error('Error displaying videos:', error);
+                displayFallbackVideos();
+            }
+        }
+        
+        async function fetchYouTubeVideos() {
+            try {
+                // First get the uploads playlist ID
+                const channelResponse = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=${CHANNEL_ID}&key=${API_KEY}`);
+                const channelData = await channelResponse.json();
+                
+                if (!channelData.items || channelData.items.length === 0) {
+                    throw new Error('Channel not found');
+                }
+                
+                const uploadsPlaylistId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
+                
+                // Get more videos initially so we can sort by popularity
+                const videosResponse = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=20&playlistId=${uploadsPlaylistId}&key=${API_KEY}`);
+                const videosData = await videosResponse.json();
+                
+                if (!videosData.items || videosData.items.length === 0) {
+                    throw new Error('No videos found');
+                }
+                
+                // Get video statistics in a separate call
+                const videoIds = videosData.items.map(item => item.contentDetails.videoId).join(',');
+                const statsResponse = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${videoIds}&key=${API_KEY}`);
+                const statsData = await statsResponse.json();
+                
+                // Create a map of video stats by ID for easy lookup
+                const statsMap = {};
+                statsData.items.forEach(item => {
+                    statsMap[item.id] = {
+                        viewCount: parseInt(item.statistics.viewCount || 0),
+                        duration: item.contentDetails.duration
+                    };
+                });
+                
+                // Map the videos with their stats
+                const videos = videosData.items.map(item => {
+                    const videoId = item.contentDetails.videoId;
+                    const stats = statsMap[videoId] || { viewCount: 0, duration: 'PT0M0S' };
+                    
+                    return {
+                        id: videoId,
+                        title: item.snippet.title,
+                        description: item.snippet.description,
+                        thumbnail: item.snippet.thumbnails.high?.url || item.snippet.thumbnails.default?.url,
+                        publishedAt: new Date(item.snippet.publishedAt),
+                        viewCount: stats.viewCount,
+                        duration: formatDuration(stats.duration)
+                    };
+                });
+                
+                // Sort by view count (descending) and take the top 6
+                return videos
+                    .sort((a, b) => b.viewCount - a.viewCount)
+                    .slice(0, VIDEO_COUNT);
+                
+            } catch (error) {
+                console.error('Error fetching YouTube videos:', error);
+                return [];
+            }
+        }
+        
+        function formatDuration(duration) {
+            // Convert ISO 8601 duration to readable format
+            const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+            if (!match) return '0:00';
+            
+            const hours = (match[1] || '').replace('H', '');
+            const minutes = (match[2] || '').replace('M', '') || '0';
+            const seconds = (match[3] || '').replace('S', '') || '00';
+            
+            let result = '';
+            if (hours) result += `${hours}:`;
+            result += `${minutes}:${seconds.padStart(2, '0')}`;
+            
+            return result;
+        }
+        
+        function formatViewCount(count) {
+            if (!count) return '0';
+            if (count >= 1000000) {
+                return `${(count / 1000000).toFixed(1)}M`;
+            } else if (count >= 1000) {
+                return `${(count / 1000).toFixed(1)}K`;
+            }
+            return count.toString();
+        }
+        
+        function createVideoCard(video) {
+            return `
+                <div class="video-card">
+                    <a href="https://www.youtube.com/watch?v=${video.id}" target="_blank">
+                        <div class="video-thumbnail">
+                            <img src="${video.thumbnail}" alt="${video.title}" onerror="this.src='https://via.placeholder.com/640x360/121212/ff0000?text=Video+Thumbnail'">
+                            <div class="video-overlay">
+                                <div class="play-button">
+                                    <i class="uil uil-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="video-info">
+                        <h3>${video.title}</h3>
+                        <p>${video.description.substring(0, 100)}${video.description.length > 100 ? '...' : ''}</p>
+                        <div class="video-stats">
+                            <span><i class="uil uil-eye"></i> ${formatViewCount(video.viewCount)} views</span>
+                            <span><i class="uil uil-clock"></i> ${video.duration}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function displayFallbackVideos() {
+            const videoGrid = document.getElementById('video-grid');
+            videoGrid.innerHTML = `
+                <div class="video-card">
+                    <a href="https://www.youtube.com/channel/${CHANNEL_ID}" target="_blank">
+                        <div class="video-thumbnail">
+                            <img src="https://via.placeholder.com/640x360/121212/ff0000?text=Visit+My+Channel" alt="Visit My Channel">
+                            <div class="video-overlay">
+                                <div class="play-button">
+                                    <i class="uil uil-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="video-info">
+                        <h3>Visit My YouTube Channel</h3>
+                        <p>Check out all my videos on YouTube. Subscribe for more content on cybersecurity, web development, and weekend rides!</p>
+                        <div class="video-stats">
+                            <span><i class="uil uil-youtube"></i> YouTube Channel</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html> 

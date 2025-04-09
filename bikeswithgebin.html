@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bikes With Gebin | Instagram</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <style>
+        :root {
+            --instagram-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --instagram-dark-bg: #000000;
+            --instagram-card-bg: #121212;
+            --instagram-border: #262626;
+            --instagram-text: #ffffff;
+            --instagram-secondary: #8e8e8e;
+            --instagram-gradient-animated: linear-gradient(
+                45deg, 
+                #f09433 0%, 
+                #e6683c 20%, 
+                #dc2743 40%, 
+                #cc2366 60%, 
+                #bc1888 80%,
+                #f09433 100%
+            );
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--instagram-dark-bg);
+            color: var(--instagram-text);
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before, body::after {
+            content: none;
+        }
+        
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .glow-orb:nth-child(1) {
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 69, 0, 0.4);
+            top: 15%;
+            left: 5%;
+            animation: floatOrb1 25s linear infinite;
+        }
+        
+        .glow-orb:nth-child(2) {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 140, 0, 0.35);
+            bottom: 10%;
+            right: 5%;
+            animation: floatOrb2 30s linear infinite;
+        }
+        
+        .glow-orb:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 99, 71, 0.3);
+            top: 60%;
+            left: 25%;
+            animation: floatOrb3 20s linear infinite;
+        }
+        
+        .glow-orb:nth-child(4) {
+            width: 350px;
+            height: 350px;
+            background: rgba(255, 165, 0, 0.25);
+            top: 30%;
+            right: 15%;
+            animation: floatOrb4 28s linear infinite;
+        }
+        
+        .glow-orb:nth-child(5) {
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 69, 0, 0.35);
+            bottom: 30%;
+            left: 10%;
+            animation: floatOrb5 22s linear infinite;
+        }
+        
+        @keyframes floatOrb1 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, 50px) rotate(90deg); }
+            50% { transform: translate(50px, 100px) rotate(180deg); }
+            75% { transform: translate(-50px, 50px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        @keyframes floatOrb2 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-80px, -40px) rotate(120deg); }
+            66% { transform: translate(-40px, -80px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        @keyframes floatOrb3 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(60px, -60px) rotate(180deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        @keyframes floatOrb4 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-100px, 80px) rotate(120deg); }
+            66% { transform: translate(80px, -60px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        @keyframes floatOrb5 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(120px, 40px) rotate(180deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: rgba(18, 18, 18, 0.95);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--instagram-gradient);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: var(--instagram-card-bg);
+            border-bottom: 1px solid var(--instagram-border);
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--instagram-gradient-animated);
+            background-size: 200% 200%;
+            animation: gradient-shift 8s ease infinite;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--instagram-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            padding: 0.8rem 2rem;
+            background: var(--instagram-gradient-animated);
+            background-size: 200% 200%;
+            animation: gradient-shift 8s ease infinite, pulse 2s infinite;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transform: scale(1);
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(225, 48, 108, 0.4);
+        }
+        
+        .cta-button:active {
+            transform: scale(0.95);
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: skewY(-10deg) translateY(0);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .cta-button:hover::before {
+            transform: skewY(-10deg) translateY(200%);
+        }
+        
+        .profile-section {
+            padding: 4rem 2rem;
+            background: var(--instagram-dark-bg);
+            border-bottom: 1px solid var(--instagram-border);
+        }
+        
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: var(--instagram-card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--instagram-border);
+        }
+        
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border: 3px solid transparent;
+            background: var(--instagram-gradient-animated);
+            background-size: 200% 200%;
+            animation: gradient-shift 8s ease infinite;
+            -webkit-background-clip: border-box;
+            -webkit-text-fill-color: initial;
+            padding: 3px;
+        }
+        
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .profile-stats {
+            display: flex;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--instagram-text);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--instagram-secondary);
+        }
+        
+        .bio {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+            color: var(--instagram-secondary);
+        }
+        
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 3rem;
+            background: var(--instagram-card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--instagram-border);
+        }
+        
+        .instagram-post {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            border: 1px solid var(--instagram-border);
+            background: var(--instagram-card-bg);
+        }
+        
+        .instagram-post img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .instagram-post:hover img {
+            transform: scale(1.05);
+        }
+        
+        .post-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .instagram-post:hover .post-overlay {
+            opacity: 1;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
+        }
+        
+        .post-stats {
+            display: flex;
+            gap: 1.5rem;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .post-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        footer {
+            background: var(--instagram-card-bg);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--instagram-border);
+        }
+        
+        footer p {
+            color: var(--instagram-secondary);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 992px) {
+            .instagram-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .profile-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-image {
+                margin: 0 auto 1.5rem;
+            }
+            
+            .profile-info {
+                align-items: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .instagram-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 4.5rem;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+                color: #fff;
+                cursor: pointer;
+            }
+            
+            .about-box h2 {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+        /* Update hover effects for dark theme */
+        .profile-container:hover, .instagram-grid:hover {
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            border: 1px solid #363636;
+        }
+        
+        /* Add new animations */
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(225, 48, 108, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(225, 48, 108, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(225, 48, 108, 0); }
+        }
+
+        .about-section {
+            padding: 4rem 2rem;
+            background: var(--instagram-dark-bg);
+        }
+
+        .about-box {
+            position: relative;
+            background: #000000;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 0 auto;
+            max-width: 800px;
+            overflow: hidden;
+        }
+
+        /* Animated gradient border */
+        .about-box::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--instagram-gradient-animated);
+            background-size: 200% 200%;
+            animation: gradient-shift 8s ease infinite;
+            z-index: -1;
+            border-radius: 16px;
+        }
+
+        .about-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: var(--instagram-gradient-animated);
+            background-size: 200% 200%;
+            animation: gradient-shift 8s ease infinite;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .about-content {
+            color: var(--instagram-text);
+            line-height: 1.8;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Add hover effect */
+        .about-box:hover::before {
+            animation: gradient-shift 4s ease infinite;
+        }
+
+        /* Blob animation */
+        .blob-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -2;
+        }
+        
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.4;
+            transform-origin: center;
+        }
+        
+        .blob:nth-child(1) {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(45deg, #f09433, #e6683c);
+            top: 20%;
+            left: -10%;
+            animation: blobMove1 25s ease-in-out infinite alternate;
+        }
+        
+        .blob:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(45deg, #dc2743, #cc2366);
+            bottom: 10%;
+            right: -5%;
+            animation: blobMove2 20s ease-in-out infinite alternate;
+        }
+        
+        .blob:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #cc2366, #bc1888);
+            top: 60%;
+            left: 20%;
+            animation: blobMove3 18s ease-in-out infinite alternate;
+        }
+        
+        @keyframes blobMove1 {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+                border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%;
+            }
+            100% {
+                transform: translate(100px, 50px) scale(1.1) rotate(20deg);
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+        }
+        
+        @keyframes blobMove2 {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+                border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+            }
+            100% {
+                transform: translate(-80px, 40px) scale(1.15) rotate(-20deg);
+                border-radius: 40% 60% 70% 30% / 70% 30% 70% 30%;
+            }
+        }
+        
+        @keyframes blobMove3 {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+                border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+            }
+            100% {
+                transform: translate(60px, -40px) scale(1.2) rotate(15deg);
+                border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="blob-container">
+        <div class="blob"></div>
+        <div class="blob"></div>
+        <div class="blob"></div>
+    </div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <header>
+        <a href="#" class="logo">
+            <i class="uil uil-instagram"></i> BikesWithGebin
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Portfolio</a>
+            <a href="hitpixels.html">YouTube</a>
+            <a href="#profile">Profile</a>
+        </div>
+        <div class="menu-toggle" style="display: none; font-size: 1.5rem; color: #fff; cursor: pointer;">
+            <i class="uil uil-bars"></i>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Bikes With Gebin</h1>
+            <p>Join me on two-wheeled adventures as I explore roads less traveled, share riding tips, and showcase the beauty of motorcycling. From weekend rides to maintenance hacks, this is where my passion for bikes comes to life.</p>
+            <a href="https://www.instagram.com/bikeswithgebin/" target="_blank" class="cta-button">
+                <i class="uil uil-instagram"></i> Follow on Instagram
+            </a>
+        </div>
+    </section>
+    
+    <section id="profile" class="profile-section">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-pic">
+                    <img src="images/dp.png" alt="Gebin George" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                </div>
+                
+                <h2>@bikeswithgebin</h2>
+                
+                <div class="profile-stats">
+                    <div class="stat">
+                        <div class="stat-number">14</div>
+                        <div class="stat-label">Posts</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">51</div>
+                        <div class="stat-label">Followers</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">37</div>
+                        <div class="stat-label">Following</div>
+                    </div>
+                </div>
+                
+                <div class="bio">
+                    <p>Chasing horizons on two wheels 🏍️ | Stories from the road less traveled | Join the journey.</p>
+                    <p>Based in Bangalore, India 🇮🇳</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="about-section">
+        <div class="container">
+            <div class="about-box">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <p>Welcome to my world of two-wheeled adventures! 🏍️</p>
+                    <p>I'm on a mission to drive them all—bikes, that is. Just like in Pokémon, where you gotta catch 'em all, I'm all about riding as many bikes as possible, exploring the roads, and capturing the thrill along the way.</p>
+                    <p>From thrilling bike trips to sharing tips and experiences, my Instagram is where I document every twist, turn, and open road. Based in Bangalore, India, I live for the freedom of the ride and the joy of discovering new machines.</p>
+                    <p>Join me on this wild journey, where every ride is a new chapter. Because when it comes to bikes, it's not just about the ride—it's about the journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Bikes With Gebin. All rights reserved. Made with <span style="color: #e1306c;">❤</span> in Bangalore</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Animation for elements when they come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, {threshold: 0.1});
+            
+            // Observe Instagram posts
+            document.querySelectorAll('.instagram-post').forEach((post, index) => {
+                post.style.opacity = '0';
+                post.style.transform = 'translateY(30px)';
+                post.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                post.style.transitionDelay = `${index * 0.1}s`;
+                observer.observe(post);
+            });
+            
+            // Add the animation class
+            const style = document.createElement('style');
+            style.textContent = `
+                .animate {
+                    opacity: 1 !important;
+                    transform: translateY(0) !important;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+
+    <!-- Add JavaScript for mobile menu -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (menuToggle && navLinks) {
+                menuToggle.style.display = window.innerWidth <= 768 ? 'block' : 'none';
+                
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    this.innerHTML = navLinks.classList.contains('active') ? 
+                        '<i class="uil uil-times"></i>' : 
+                        '<i class="uil uil-bars"></i>';
+                });
+                
+                window.addEventListener('resize', function() {
+                    menuToggle.style.display = window.innerWidth <= 768 ? 'block' : 'none';
+                    if (window.innerWidth > 768) {
+                        navLinks.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="uil uil-bars"></i>';
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Find and remove the duplicate menu toggle element -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggles = document.querySelectorAll('.menu-toggle');
+            if (menuToggles.length > 1) {
+                menuToggles[1].remove();
+            }
+        });
+    </script>
+</body>
+</html> 
